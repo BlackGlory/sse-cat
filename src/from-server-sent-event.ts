@@ -6,11 +6,13 @@ export function fromServerSentEvent(url: string, { events, headers }: { events: 
     const sse = new EventSource(url, { headers })
     // @ts-ignore
     events.forEach(event => sse.addEventListener(event, messageListener))
+      // @ts-ignore
     sse.addEventListener('error', errorListener)
 
     return () => {
       // @ts-ignore
       events.forEach(event => sse.removeEventListener(event, messageListener))
+      // @ts-ignore
       sse.removeEventListener('error', errorListener)
       sse.close()
     }
@@ -19,8 +21,8 @@ export function fromServerSentEvent(url: string, { events, headers }: { events: 
       observer.next(evt.data)
     }
 
-    function errorListener(err: any) {
-      observer.error(err)
+    function errorListener(err: ErrorEvent) {
+      if (err.message) observer.error(err.message)
     }
   })
 }
