@@ -55,7 +55,7 @@ sse-cat \
 
 ```sh
 sse-cat \
-  --event 'message'
-  --event 'custom-event'
+  --event 'message' \
+  --event 'custom-event' \
   'http://localhost:8080/sse'
 ```
