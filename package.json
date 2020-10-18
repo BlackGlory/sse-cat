@@ -1,0 +1,54 @@
+{
+  "name": "sse-cat",
+  "version": "1.0.0",
+  "description": "Command-line client for Server-Sent Events(SSE)",
+  "keywords": [
+    "CLI",
+    "cat",
+    "SSE",
+    "Server-Sent Event",
+    "Server-Sent Events"
+  ],
+  "bin": {
+    "sse-cat": "lib/cli.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src",
+    "dev": "ts-node src/index.ts",
+    "dev:debug": "node --inspect-brk node_modules/.bin/ts-node src/index.ts",
+    "prepublishOnly": "yarn clean && yarn build",
+    "clean": "rm -rf lib",
+    "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./lib",
+    "release": "standard-version"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "commander": "^6.1.0",
+    "eventsource": "^1.0.7",
+    "rxjs": "^7.0.0-beta.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/eventsource": "^1.1.4",
+    "@types/node": "^14.11.10",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "^7.11.0",
+    "husky": "^4.3.0",
+    "standard-version": "^9.0.0",
+    "ts-node": "^9.0.0",
+    "tscpaths": "^0.0.9",
+    "typescript": "^4.0.3"
+  }
+}
