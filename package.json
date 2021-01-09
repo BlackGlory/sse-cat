@@ -1,7 +1,7 @@
 {
   "name": "sse-cat",
   "version": "1.2.0",
-  "description": "Command-line client for Server-Sent Events(SSE)",
+  "description": "Command-line client for Server-Sent Events(SSE).",
   "keywords": [
     "CLI",
     "cat",
@@ -15,6 +15,7 @@
   "files": [
     "lib"
   ],
+  "repository": "git@github.com:BlackGlory/sse-cat.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {

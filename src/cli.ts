@@ -5,6 +5,7 @@ import { fromMultipleServerSentEvents } from './from-multiple-server-sent-events
 program
   .name('sse-cat')
   .version(require('../package.json').version)
+  .description(require('../package.json').description)
   .option('-h, --header <header>', 'Pass custom header(s) to server', collect, [])
   .option('-e, --event <event>', 'Pass custom event(s) that need to be captured', collect, [])
   .arguments('<url...>')
