@@ -10,10 +10,11 @@ program
   .option('-e, --event <event>', 'Pass custom event(s) that need to be captured', collect, [])
   .arguments('<url...>')
   .action((urls: string[]) => {
-    const headers: Headers = createHeaders(program.header)
-    const events: string[] = (program.event as string[]).length === 0
+    const opts = program.opts()
+    const headers: Headers = createHeaders(opts.header)
+    const events: string[] = (opts.event as string[]).length === 0
                              ? ['message']
-                             : program.event
+                             : opts.event
     fromMultipleServerSentEvents(urls, { headers, events })
       .subscribe(
         message => console.log(message)
