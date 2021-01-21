@@ -22,7 +22,7 @@ export function fromServerSentEvent(url: string, { events, headers }: { events: 
     }
 
     function errorListener(err: ErrorEvent) {
-      if (err.message) observer.error(err.message)
+      if (err.message) console.error(err.message)
     }
   })
 }

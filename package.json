@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "commander": "^7.0.0",
-    "eventsource": "^1.0.7",
-    "rxjs": "^7.0.0-beta.8"
+    "eventsource": "https://github.com/EventSource/eventsource#46fe04e03e54f4129a28bf75b3a1e5f4ab68b52a",
+    "rxjs": "^7.0.0-beta.10"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
