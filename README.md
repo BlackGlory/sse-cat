@@ -4,10 +4,15 @@ Command-line client for Server-Sent Events(SSE).
 ```sh
 Usage: sse-cat [options] <url...>
 
+Command-line client for Server-Sent Events(SSE).
+
 Options:
-  -h, --header <header>  Pass custom header(s) to server (default: [])
-  -e, --event <event>    Pass custom event(s) that need to be captured (default: [])
-  --help                 display help for command
+  -V, --version             output the version number
+  -h, --header <header>     Pass custom header(s) to server (default: [])
+  -e, --event <name>        Pass custom event(s) that need to be captured (default: [])
+  --heartbeat-event <name>
+  --heartbeat-timeout <ms>
+  --help
 ```
 
 ## Install
@@ -57,5 +62,16 @@ sse-cat \
 sse-cat \
   --event 'message' \
   --event 'custom-event' \
+  'http://localhost:8080/sse'
+```
+
+### Heartbeat
+
+The heartbeat checker will only be enabled when all heartbeat options are set.
+
+```sh
+sse-cat \
+  --heartbeat-event heartbeat \
+  --heartbeat-timeout 60000 \
   'http://localhost:8080/sse'
 ```

@@ -11,6 +11,7 @@ module.exports = {
 , rules: {
     'no-constant-condition': 'off'
   , 'no-async-promise-executor': 'off'
+  , 'no-inner-declarations': 'off'
   , '@typescript-eslint/no-inferrable-types': 'off'
   , '@typescript-eslint/ban-types': 'off'
   , '@typescript-eslint/no-empty-function': 'off'

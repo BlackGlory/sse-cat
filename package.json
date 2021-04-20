@@ -22,8 +22,8 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src",
     "test": "jest --config jest.config.js",
     "test:coverage": "jest --coverage --config jest.config.js",
-    "dev": "ts-node src/index.ts",
-    "dev:debug": "node --inspect-brk node_modules/.bin/ts-node src/index.ts",
+    "dev": "ts-node src/cli.ts",
+    "dev:debug": "node --inspect-brk node_modules/.bin/ts-node src/cli.ts",
     "prepublishOnly": "run-s clean build",
     "clean": "rimraf lib",
     "build": "run-s build:*",
@@ -38,10 +38,14 @@
     }
   },
   "dependencies": {
+    "@blackglory/errors": "^1.1.2",
+    "@blackglory/go": "^0.1.0",
+    "@blackglory/types": "^0.4.2",
     "commander": "^7.2.0",
     "eventsource": "^1.1.0",
+    "extra-timers": "^0.2.1",
     "hotypes": "^0.1.5",
-    "rxjs": "^7.0.0-beta.15"
+    "rxjs": "^7.0.0-rc.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",

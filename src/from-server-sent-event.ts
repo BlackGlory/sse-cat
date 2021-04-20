@@ -1,32 +1,62 @@
 import EventSource from 'eventsource'
 import { Observable } from 'rxjs'
 import { Dictionary } from 'hotypes'
+import { IHeartbeatOptions } from './types'
+import { CustomError } from '@blackglory/errors'
+import { setTimeout } from 'extra-timers'
 
 export function fromServerSentEvent(
   url: string
-, { events, headers }: { events: string[]; headers: Dictionary<string> }
+, { events, headers, heartbeat }: {
+    events: string[]
+    headers: Dictionary<string>
+    heartbeat?: IHeartbeatOptions
+  }
 ): Observable<string> {
   return new Observable(observer => {
-    const sse = new EventSource(url, { headers })
-    // @ts-ignore
-    events.forEach(event => sse.addEventListener(event, messageListener))
-      // @ts-ignore
-    sse.addEventListener('error', errorListener)
+    const es = new EventSource(url, { headers })
+    es.addEventListener('error', (evt: Event) => {
+      const err = evt as ErrorEvent
+      if (err.message) {
+        console.error(err.message)
+      }
+    })
 
-    return () => {
-      // @ts-ignore
-      events.forEach(event => sse.removeEventListener(event, messageListener))
-      // @ts-ignore
-      sse.removeEventListener('error', errorListener)
-      sse.close()
+    events.forEach(event => {
+      es.addEventListener(event, (evt: Event) => {
+        const { data } = evt as MessageEvent<string>
+        observer.next(data)
+      })
+    })
+
+    let cancelTimeout: (() => void) | null = null
+    if (heartbeat) {
+      const { timeout, event } = heartbeat
+
+      es.addEventListener('open', () => {
+        updateTimeout()
+
+        es.addEventListener(event, updateTimeout)
+      })
+
+      function updateTimeout() {
+        if (cancelTimeout) cancelTimeout()
+        cancelTimeout = setTimeout(timeout, heartbeatTimeout)
+      }
     }
 
-    function messageListener(evt: MessageEvent<string>) {
-      observer.next(evt.data)
+    return close
+
+    function close() {
+      if (cancelTimeout) cancelTimeout()
+      es.close()
     }
 
-    function errorListener(err: ErrorEvent) {
-      if (err.message) console.error(err.message)
+    function heartbeatTimeout() {
+      close()
+      observer.error(new HeartbeatTimeoutError())
     }
   })
 }
+
+export class HeartbeatTimeoutError extends CustomError {}
