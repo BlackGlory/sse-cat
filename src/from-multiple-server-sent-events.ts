@@ -1,5 +1,5 @@
 import { Observable, merge } from 'rxjs'
-import { fromServerSentEvent, HeartbeatTimeoutError } from './from-server-sent-event'
+import { fromServerSentEvent } from './from-server-sent-event'
 import { Dictionary } from 'hotypes'
 import { IHeartbeatOptions } from './types'
 import { retryWhen, tap } from 'rxjs/operators'

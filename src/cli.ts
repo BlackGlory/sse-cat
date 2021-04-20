@@ -12,13 +12,8 @@ program
   .name('sse-cat')
   .version(require('../package.json').version)
   .description(require('../package.json').description)
-  .option('-h, --header <header>', 'Pass custom header(s) to server', collect, [])
-  .option(
-    '-e, --event <name>'
-  , 'Pass custom event(s) that need to be captured'
-  , collect
-  , []
-  )
+  .option('--header <header>', 'Pass custom header(s) to server', collect, [])
+  .option('--event <name>', 'Pass custom event(s) that need to be captured', collect, [])
   .option('--heartbeat-event <name>')
   .option('--heartbeat-timeout <ms>')
   .arguments('<url...>')

@@ -8,11 +8,11 @@ Command-line client for Server-Sent Events(SSE).
 
 Options:
   -V, --version             output the version number
-  -h, --header <header>     Pass custom header(s) to server (default: [])
-  -e, --event <name>        Pass custom event(s) that need to be captured (default: [])
+  --header <header>         Pass custom header(s) to server (default: [])
+  --event <name>            Pass custom event(s) that need to be captured (default: [])
   --heartbeat-event <name>
   --heartbeat-timeout <ms>
-  --help
+  -h, --help                display help for command
 ```
 
 ## Install
