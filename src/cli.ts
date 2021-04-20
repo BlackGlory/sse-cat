@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { program } from 'commander'
 import { fromMultipleServerSentEvents } from './from-multiple-server-sent-events'
+import { createHeaderDictionary } from '@utils/create-header-dictionary'
+import { Dictionary } from 'hotypes'
 
 program
   .name('sse-cat')
@@ -11,22 +13,22 @@ program
   .arguments('<url...>')
   .action((urls: string[]) => {
     const opts = program.opts()
-    const headers: Headers = createHeaders(opts.header)
+    const headers: Dictionary<string> = createHeaderDictionary(opts.header)
     const events: string[] = (opts.event as string[]).length === 0
                              ? ['message']
                              : opts.event
     fromMultipleServerSentEvents(urls, { headers, events })
-      .subscribe(
-        message => console.log(message)
-      , error => console.error(error)
-      )
+      .subscribe({
+        next(message) {
+          console.log(message)
+        }
+      , error(error) {
+          console.error(error)
+        }
+      })
   })
   .parse()
 
 function collect(value: string, previous: string[]) {
   return previous.concat([value])
-}
-
-function createHeaders(headers: string[]): Headers {
-  return Object.fromEntries(headers.map(x => x.split(':')))
 }

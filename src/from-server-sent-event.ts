@@ -1,7 +1,11 @@
-import EventSource = require('eventsource')
+import EventSource from 'eventsource'
 import { Observable } from 'rxjs'
+import { Dictionary } from 'hotypes'
 
-export function fromServerSentEvent(url: string, { events, headers }: { events: string[], headers: Headers }): Observable<string> {
+export function fromServerSentEvent(
+  url: string
+, { events, headers }: { events: string[]; headers: Dictionary<string> }
+): Observable<string> {
   return new Observable(observer => {
     const sse = new EventSource(url, { headers })
     // @ts-ignore
