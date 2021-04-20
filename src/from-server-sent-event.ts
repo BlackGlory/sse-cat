@@ -29,7 +29,7 @@ export function fromServerSentEvent(
       })
     })
 
-    let cancelTimeout: (() => void) | null = null
+    let cancelHeartbeatTimeout: (() => void) | null = null
     if (heartbeat) {
       const { timeout, event } = heartbeat
 
@@ -40,15 +40,15 @@ export function fromServerSentEvent(
       })
 
       function updateTimeout() {
-        if (cancelTimeout) cancelTimeout()
-        cancelTimeout = setTimeout(timeout, heartbeatTimeout)
+        if (cancelHeartbeatTimeout) cancelHeartbeatTimeout()
+        cancelHeartbeatTimeout = setTimeout(timeout, heartbeatTimeout)
       }
     }
 
     return close
 
     function close() {
-      if (cancelTimeout) cancelTimeout()
+      if (cancelHeartbeatTimeout) cancelHeartbeatTimeout()
       es.close()
     }
 
