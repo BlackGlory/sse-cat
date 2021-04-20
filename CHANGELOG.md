@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/BlackGlory/sse-cat/compare/v1.4.0...v2.0.0) (2021-04-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* The shorthand `-h`, `-e` are removed
+
+### Features
+
+* remove shorthand options ([62ec887](https://github.com/BlackGlory/sse-cat/commit/62ec88712cd8f82ed5fad0fcb0bb33c92e256fc6))
+
 ## [1.4.0](https://github.com/BlackGlory/sse-cat/compare/v1.3.2...v1.4.0) (2021-04-20)
 
 
