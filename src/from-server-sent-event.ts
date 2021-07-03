@@ -1,6 +1,6 @@
 import EventSource from 'eventsource'
 import { Observable } from 'rxjs'
-import { Dictionary } from 'hotypes'
+import { Dictionary } from 'justypes'
 import { IHeartbeatOptions } from './types'
 import { CustomError } from '@blackglory/errors'
 import { setTimeout } from 'extra-timers'

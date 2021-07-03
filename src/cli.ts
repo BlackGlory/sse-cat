@@ -2,7 +2,7 @@
 import { program } from 'commander'
 import { fromMultipleServerSentEvents } from './from-multiple-server-sent-events'
 import { createHeaderDictionary } from '@utils/create-header-dictionary'
-import { Dictionary } from 'hotypes'
+import { Dictionary } from 'justypes'
 import { isUndefined, isntNull } from '@blackglory/types'
 import { IHeartbeatOptions } from './types'
 import { go } from '@blackglory/go'

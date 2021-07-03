@@ -1,6 +1,6 @@
 import { Observable, merge } from 'rxjs'
 import { fromServerSentEvent } from './from-server-sent-event'
-import { Dictionary } from 'hotypes'
+import { Dictionary } from 'justypes'
 import { IHeartbeatOptions } from './types'
 import { retryWhen, tap } from 'rxjs/operators'
 
