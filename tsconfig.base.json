@@ -5,6 +5,10 @@
   , "strict": true
   , "esModuleInterop": true
   , "newLine": "lf"
+  , "plugins": [
+      { "transform": "typescript-transform-paths" }
+    , { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   , "baseUrl": "."
   , "paths": {
       "@src/*": ["src/*"]
