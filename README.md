@@ -47,7 +47,7 @@ sse-cat \
 sse-cat \
   --header 'User-Agent: sse-cat' \
   --header "Authorization: Bearer $TOKEN" \
-  'http://localhost:8080/sse'
+  -- 'http://localhost:8080/sse'
 ```
 
 ### Custom events
@@ -55,7 +55,7 @@ sse-cat \
 sse-cat \
   --event 'message' \
   --event 'custom-event' \
-  'http://localhost:8080/sse'
+  -- 'http://localhost:8080/sse'
 ```
 
 ### Heartbeat
