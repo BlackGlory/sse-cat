@@ -11,15 +11,15 @@ program
   .name('sse-cat')
   .version(require('../package.json').version)
   .description(require('../package.json').description)
-  .option('--header <header>', 'Pass custom header(s) to server', collect, [])
-  .option('--event <name>', 'Pass custom event(s) that need to be captured', collect, [])
+  .option('--header [header]', 'Pass custom header(s) to server')
+  .option('--event [name]', 'Pass custom event(s) that need to be captured')
   .option('--heartbeat-event [name]')
   .option('--heartbeat-timeout [ms]')
   .arguments('<url...>')
   .action((urls: string[]) => {
     const opts = program.opts<{
-      header: string[]
-      event: string[]
+      header?: string[]
+      event?: string[]
       heartbeatEvent?: string
       heartbeatTimeout?: string
     }>()
@@ -62,16 +62,11 @@ program
   })
   .parse()
 
-function collect(value: string, previous: string[]) {
-  return previous.concat([value])
-}
-
-function createEvents(events: string[]): string[] {
-  if (events.length === 0) {
-    return ['message']
-  } else {
+function createEvents(events?: string[]): string[] {
+  if (events && events.length > 0) {
     return events
   }
+  return ['message']
 }
 
 function isNumberString(str: string): boolean {
