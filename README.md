@@ -10,13 +10,12 @@ Options:
   -V, --version             output the version number
   --header <header>         Pass custom header(s) to server (default: [])
   --event <name>            Pass custom event(s) that need to be captured (default: [])
-  --heartbeat-event <name>
-  --heartbeat-timeout <ms>
+  --heartbeat-event [name]
+  --heartbeat-timeout [ms]
   -h, --help                display help for command
 ```
 
 ## Install
-
 ```sh
 npm install -g sse-cat
 # or
@@ -24,7 +23,6 @@ yarn global add sse-cat
 ```
 
 ### Install from source
-
 ```sh
 yarn install
 yarn build
@@ -32,15 +30,12 @@ yarn global add "file:$(pwd)"
 ```
 
 ## Usage
-
 ### Single SSE
-
 ```sh
 sse-cat 'http://localhost:8080/sse'
 ```
 
 ### Multiple SSE
-
 ```sh
 sse-cat \
   'http://localhost:8080/sse/1' \
@@ -48,7 +43,6 @@ sse-cat \
 ```
 
 ### Headers
-
 ```sh
 sse-cat \
   --header 'User-Agent: sse-cat' \
@@ -57,7 +51,6 @@ sse-cat \
 ```
 
 ### Custom events
-
 ```sh
 sse-cat \
   --event 'message' \
@@ -66,7 +59,6 @@ sse-cat \
 ```
 
 ### Heartbeat
-
 The heartbeat checker will only be enabled when all heartbeat options are set.
 
 ```sh

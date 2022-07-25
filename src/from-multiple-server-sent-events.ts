@@ -1,8 +1,8 @@
-import { Observable, merge } from 'rxjs'
+import { Observable, throwError, merge } from 'rxjs'
+import { catchError, retry } from 'rxjs/operators'
 import { fromServerSentEvent } from './from-server-sent-event'
 import { Dictionary } from 'justypes'
 import { IHeartbeatOptions } from './types'
-import { retryWhen, tap } from 'rxjs/operators'
 
 export function fromMultipleServerSentEvents(
   urls: string[]
@@ -18,12 +18,13 @@ export function fromMultipleServerSentEvents(
     , headers
     , heartbeat
     }).pipe(
-      retryWhen(errors => errors.pipe(
-        tap(error => console.error(`${error}`))
-      ))
+      catchError(err => {
+        console.error(`${err}`)
+        return throwError(() => err)
+      })
+    , retry()
     )
   })
 
   return merge(...observables)
-
 }
