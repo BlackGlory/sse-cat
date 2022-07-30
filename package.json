@@ -19,6 +19,7 @@
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
+    "deduplicate": "yarn-deduplicate",
     "prepare": "ts-patch install -s",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src",
     "test": "jest --config jest.config.js",
@@ -66,6 +67,7 @@
     "ts-patch": "^2.0.1",
     "tsconfig-paths": "^4.0.0",
     "typescript": "^4.7.4",
-    "typescript-transform-paths": "^3.3.1"
+    "typescript-transform-paths": "^3.3.1",
+    "yarn-deduplicate": "^5.0.0"
   }
 }
