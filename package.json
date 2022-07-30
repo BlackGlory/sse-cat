@@ -10,30 +10,32 @@
     "Server-Sent Events"
   ],
   "bin": {
-    "sse-cat": "lib/cli.js"
+    "sse-cat": "dist/cli.cjs"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "repository": "git@github.com:BlackGlory/sse-cat.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
     "deduplicate": "yarn-deduplicate",
+    "prepublishOnly": "run-s prepare clean build bundle",
     "prepare": "ts-patch install -s",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src",
     "test": "jest --config jest.config.js",
     "test:coverage": "jest --coverage --config jest.config.js",
     "dev": "ts-node -r tsconfig-paths/register src/cli.ts",
     "dev:debug": "node --inspect-brk node_modules/.bin/ts-node -r tsconfig-paths/register src/cli.ts",
-    "prepublishOnly": "run-s prepare clean build",
-    "clean": "rimraf lib",
+    "clean": "rimraf lib dist",
     "build": "tsc --project tsconfig.build.json",
+    "bundle": "webpack --stats-error-details",
+    "smoke": "node dist/cli.cjs --help",
     "release": "standard-version"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s prepare lint build test",
+      "pre-commit": "run-s prepare clean lint build test bundle smoke",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -68,6 +70,8 @@
     "tsconfig-paths": "^4.0.0",
     "typescript": "^4.7.4",
     "typescript-transform-paths": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
     "yarn-deduplicate": "^5.0.0"
   }
 }
