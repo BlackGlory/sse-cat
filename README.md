@@ -1,20 +1,6 @@
 # sse-cat
 Command-line client for Server-Sent Events(SSE).
 
-```sh
-Usage: sse-cat [options] <url...>
-
-Command-line client for Server-Sent Events(SSE).
-
-Options:
-  -V, --version             output the version number
-  --header [header...]         Pass custom header(s) to server
-  --event [name...]            Pass custom event(s) that need to be captured
-  --heartbeat-event [name]
-  --heartbeat-timeout [ms]
-  -h, --help                display help for command
-```
-
 ## Install
 ```sh
 npm install -g sse-cat
@@ -30,6 +16,20 @@ yarn global add "file:$(pwd)"
 ```
 
 ## Usage
+```sh
+Usage: sse-cat [options] <url...>
+
+Command-line client for Server-Sent Events(SSE).
+
+Options:
+  -V, --version             output the version number
+  --header [header...]         Pass custom header(s) to server
+  --event [name...]            Pass custom event(s) that need to be captured
+  --heartbeat-event [name]
+  --heartbeat-timeout [ms]
+  -h, --help                display help for command
+```
+
 ### Single SSE
 ```sh
 sse-cat 'http://localhost:8080/sse'
