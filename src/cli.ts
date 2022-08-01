@@ -7,10 +7,14 @@ import { IHeartbeatOptions } from './types'
 import { go } from '@blackglory/go'
 import { assert } from '@blackglory/errors'
 
+const name = 'sse-cat'
+const { version, description } = require('../package.json')
+process.title = name
+
 program
-  .name('sse-cat')
-  .version(require('../package.json').version)
-  .description(require('../package.json').description)
+  .name(name)
+  .version(version)
+  .description(description)
   .option('--header [header...]', 'Pass custom header(s) to server')
   .option('--event [name...]', 'Pass custom event(s) that need to be captured')
   .option('--heartbeat-event [name]')
