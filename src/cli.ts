@@ -2,10 +2,17 @@
 import { program } from 'commander'
 import { fromMultipleServerSentEvents } from './from-multiple-server-sent-events'
 import { createHeaderDictionary } from '@utils/create-header-dictionary'
-import { isUndefined, isntNull } from '@blackglory/types'
+import { isUndefined, isntUndefined } from '@blackglory/types'
 import { IHeartbeatOptions } from './types'
-import { go } from '@blackglory/go'
 import { assert } from '@blackglory/errors'
+import { Dictionary } from 'justypes'
+
+interface IOptions {
+  header?: string[]
+  event?: string[]
+  heartbeatEvent?: string
+  heartbeatTimeout?: string
+}
 
 const name = 'sse-cat'
 const { version, description } = require('../package.json')
@@ -21,38 +28,10 @@ program
   .option('--heartbeat-timeout [ms]')
   .arguments('<url...>')
   .action((urls: string[]) => {
-    const opts = program.opts<{
-      header?: string[]
-      event?: string[]
-      heartbeatEvent?: string
-      heartbeatTimeout?: string
-    }>()
-    const headers = createHeaderDictionary(opts.header)
-    const events = createEvents(opts.event)
-    const heartbeatEvent = opts.heartbeatEvent ?? null
-    const heartbeatTimeout = go(() => {
-      if (isUndefined(opts.heartbeatTimeout)) return null
-
-      assert(
-        isNumberString(opts.heartbeatTimeout)
-      , 'The parameter heartbeat-timeout must be an integer'
-      )
-
-      const timeout = Number.parseInt(opts.heartbeatTimeout, 10)
-      assert(timeout > 0, 'timeout must greater than zero')
-      return timeout
-    })
-    const heartbeatOptions = go(() => {
-      if (isntNull(heartbeatEvent) && isntNull(heartbeatTimeout)) {
-        const options: IHeartbeatOptions = {
-          event: heartbeatEvent
-        , timeout: heartbeatTimeout
-        }
-        return options
-      } else {
-        return undefined
-      }
-    })
+    const options = program.opts<IOptions>()
+    const headers = getHeaders(options)
+    const events = getEvents(options)
+    const heartbeatOptions = getHeartbeatOptions(options)
 
     fromMultipleServerSentEvents(urls, {
       headers
@@ -66,11 +45,55 @@ program
   })
   .parse()
 
+function getHeartbeatOptions(options: IOptions): IHeartbeatOptions | undefined {
+  const heartbeatEvent = getHeartbeatEvent(options)
+  const heartbeatTimeout = getHeartbeatTimeout(options)
+
+  if (isntUndefined(heartbeatEvent) && isntUndefined(heartbeatTimeout)) {
+    const options: IHeartbeatOptions = {
+      event: heartbeatEvent
+    , timeout: heartbeatTimeout
+    }
+    return options
+  } else {
+    return undefined
+  }
+}
+
+function getHeartbeatTimeout(options: IOptions): number | undefined {
+  if (isUndefined(options.heartbeatTimeout)) {
+    return undefined
+  } else {
+    assert(
+      isNumberString(options.heartbeatTimeout)
+    , 'The parameter heartbeat-timeout must be an integer'
+    )
+
+    const timeout = Number.parseInt(options.heartbeatTimeout, 10)
+    assert(timeout > 0, 'timeout must greater than zero')
+
+    return timeout
+  }
+}
+
+function getHeartbeatEvent(options: IOptions): string | undefined {
+  return options.heartbeatEvent
+}
+
+function getHeaders(options: IOptions): Dictionary<string> {
+  return createHeaderDictionary(options.header)
+}
+
+function getEvents(options: IOptions): string[] {
+  return createEvents(options.event)
+}
+
 function createEvents(events?: string[]): string[] {
   if (events && events.length > 0) {
     return events
+  } else {
+    return ['message']
   }
-  return ['message']
 }
 
 function isNumberString(str: string): boolean {
