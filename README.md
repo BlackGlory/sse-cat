@@ -3,7 +3,7 @@ Command-line client for Server-Sent Events(SSE).
 
 ## Install
 ```sh
-npm install -g sse-cat
+npm install --global sse-cat
 # or
 yarn global add sse-cat
 ```
