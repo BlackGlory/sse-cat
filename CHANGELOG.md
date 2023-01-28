@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/BlackGlory/sse-cat/compare/v2.1.0...v2.1.1) (2023-01-28)
+
+
+### Bug Fixes
+
+* type options ([560b63b](https://github.com/BlackGlory/sse-cat/commit/560b63b570027926ce9015bc921a7bd547dbcb7b))
+
 ## [2.1.0](https://github.com/BlackGlory/sse-cat/compare/v2.0.9...v2.1.0) (2022-08-01)
 
 
