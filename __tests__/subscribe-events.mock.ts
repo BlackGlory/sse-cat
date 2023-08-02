@@ -53,15 +53,6 @@ export const server = setupServer(
     }
   }))
 
-, rest.get('http://localhost/no-heartbeat', (req, res, ctx) => {
-    return res(
-      ctx.status(200)
-    , ctx.set('Connection', 'keep-alive')
-    , ctx.set('Content-Type', 'text/event-stream')
-    , ctx.body(toArray(stringifyEvent({ data: 'data' })).join(''))
-    )
-  })
-
 , rest.get('http://localhost/heartbeat', (req, res, ctx) => {
     return res(
       ctx.status(200)
