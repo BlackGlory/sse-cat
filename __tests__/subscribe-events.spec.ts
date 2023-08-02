@@ -71,7 +71,7 @@ describe('subscribeEvents', () => {
 
     test('timeout', async () => {
       const error = jest.spyOn(console, 'error')
-      const iter = subscribeMessages('http://localhost/no-heartbeat', {
+      const iter = subscribeMessages('http://localhost/heartbeat', {
         events: ['message']
       , headers: {}
       , heartbeat: {
