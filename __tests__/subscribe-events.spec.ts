@@ -64,6 +64,7 @@ describe('subscribeEvents', () => {
     ])
   })
 
+  // 此处的心跳检测测试通过客户端超时来模拟服务器超时, 这是因为msw不支持模拟服务器超时.
   describe('heartbeat', () => {
     afterEach(() => {
       jest.restoreAllMocks()
