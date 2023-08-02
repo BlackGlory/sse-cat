@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/BlackGlory/sse-cat/compare/v3.0.0...v3.0.1) (2023-08-02)
+
+
+### Bug Fixes
+
+* heartbeat ([7966306](https://github.com/BlackGlory/sse-cat/commit/7966306f695bc7c86cae100c9cc556e5977244e9))
+
 ## [3.0.0](https://github.com/BlackGlory/sse-cat/compare/v2.1.1...v3.0.0) (2023-08-02)
 
 

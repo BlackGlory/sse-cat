@@ -1,6 +1,6 @@
 {
   "name": "sse-cat",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Command-line client for Server-Sent Events(SSE).",
   "keywords": [
     "CLI",
