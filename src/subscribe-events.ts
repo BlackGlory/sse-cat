@@ -18,8 +18,8 @@ export async function* subscribeMessages(
     heartbeat?: IHeartbeatOptions
   }
 ): AsyncIterableIterator<string> {
-  let cancelHeartbeatTimeout: (() => void) | undefined = undefined
-  let lastEventId: string | undefined = undefined
+  let cancelHeartbeatTimeout: (() => void) | undefined
+  let lastEventId: string | undefined
 
   while (true) {
     try {
@@ -31,26 +31,22 @@ export async function* subscribeMessages(
         , id
         } of fetchEvents(
           () => new Request(url, { headers, signal: controller.signal })
-        , { lastEventId }
+        , {
+            lastEventId
+          , onOpen(): void {
+              if (heartbeat) {
+                resetHeartbeatTimeout(controller, heartbeat.timeout)
+              }
+            }
+          }
         )
       ) {
         if (isntUndefined(lastEventId)) {
           lastEventId = id
         }
 
-        if (heartbeat) {
-          if (cancelHeartbeatTimeout) {
-            if (heartbeat.event === event) {
-              cancelHeartbeatTimeout()
-              cancelHeartbeatTimeout = setTimeout(heartbeat.timeout, () => {
-                controller.abort()
-              })
-            }
-          } else {
-            cancelHeartbeatTimeout = setTimeout(heartbeat.timeout, () => {
-              controller.abort()
-            })
-          }
+        if (heartbeat && event === heartbeat.event) {
+          resetHeartbeatTimeout(controller, heartbeat.timeout)
         }
 
         if (events.includes(event)) {
@@ -68,5 +64,10 @@ export async function* subscribeMessages(
     } finally {
       cancelHeartbeatTimeout?.()
     }
+  }
+
+  function resetHeartbeatTimeout(controller: AbortController, timeout: number): void {
+    cancelHeartbeatTimeout?.()
+    cancelHeartbeatTimeout = setTimeout(timeout, () => controller.abort())
   }
 }

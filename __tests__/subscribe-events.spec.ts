@@ -83,13 +83,12 @@ describe('subscribeEvents', () => {
       const results: string[] = []
       for await (const message of iter) {
         results.push(message)
-        if (results.length === 3) break
-        await delay(300)
+        if (results.length === 2) break
+        await delay(600)
       }
 
       expect(results).toStrictEqual([
         'data'
-      , 'data'
       , 'data'
       ])
       expect(error).toBeCalledWith('heartbeat timeout')
@@ -109,13 +108,12 @@ describe('subscribeEvents', () => {
       const results: string[] = []
       for await (const message of iter) {
         results.push(message)
-        if (results.length === 3) break
-        await delay(300)
+        if (results.length === 2) break
+        await delay(400)
       }
 
       expect(results).toStrictEqual([
         'data'
-      , 'data'
       , 'data'
       ])
       expect(error).not.toBeCalled()

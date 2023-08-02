@@ -2613,7 +2613,7 @@ extra-compatible@^0.2.0:
     "@blackglory/prelude" "^0.3.0"
     iterable-operator "^4.0.2"
 
-extra-fetch@^4.0.6, extra-fetch@^4.0.7:
+extra-fetch@^4.0.7:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/extra-fetch/-/extra-fetch-4.0.7.tgz#3cf48db988611fb79b865ca95e011e6ba4aa83ed"
   integrity sha512-NOV6EiTnXzyR3FnfRwRWkN+Jjv4vtCx3ky1+qMa+CLWMsu8+OHFeG7+8NK/e/eqYK5pgjw6/4avNdh29hOAmpQ==
@@ -2707,17 +2707,17 @@ extra-rand@^0.1.1:
   resolved "https://registry.yarnpkg.com/extra-rand/-/extra-rand-0.1.1.tgz#e75e71ec96eb2f9b47d2a3c6513b3fb042f05a45"
   integrity sha512-sDpJWzuKa1bTrVVG3dkCiNMt93NanphQIWhW4tUS9PDiA0KTZ+fzyS4Idw+7/lH5ZzxtOiHEJEnBWSN4gi8gyA==
 
-extra-sse@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/extra-sse/-/extra-sse-0.3.0.tgz#2f70eced97ee6c3f7b0708ace824344e231cb48f"
-  integrity sha512-w5yKEUecf+b67Tm+LMGBaj8DNhTJmw+YqnMmhHA+dB2Pg+6J3+PY6PYeHL2eu+G2IchWOcyhtNxHPsFZwL4pdw==
+extra-sse@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/extra-sse/-/extra-sse-0.3.1.tgz#6e7d3c265cf6dec338466111640b9d28cd6ceb4d"
+  integrity sha512-h/JEtjNjkj+qIiRM+4knkt/o/TiafD729JBRyXsogh0vViqH9CwfLxtJj7Kj3e5losib+w0DZYLMoYXXClZIxA==
   dependencies:
     "@blackglory/prelude" "^0.3.3"
-    extra-fetch "^4.0.6"
-    extra-promise "^6.0.6"
-    extra-stream "^0.3.0"
+    extra-fetch "^4.0.7"
+    extra-promise "^6.0.7"
+    extra-stream "^0.3.1"
 
-extra-stream@^0.3.0:
+extra-stream@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/extra-stream/-/extra-stream-0.3.1.tgz#d59fec3788602d78f2f097477a347deed778e11c"
   integrity sha512-2eV7kLrtBzGZXWt+KZf2QQ4ARSOYfn01pkhEfdYaFo19x8XC1b/4/UMtpeWlnXPI1IB50cb9c4zzZSQ0ogRbzw==
