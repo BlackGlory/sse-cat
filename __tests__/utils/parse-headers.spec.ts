@@ -1,4 +1,4 @@
-import { parseHeaders } from '@utils/parse-headers'
+import { parseHeaders } from '@utils/parse-headers.js'
 
 describe('parseHeaders', () => {
   test('empty', () => {

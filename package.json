@@ -9,70 +9,77 @@
     "Server-Sent Event",
     "Server-Sent Events"
   ],
+  "type": "module",
   "bin": {
-    "sse-cat": "dist/cli.cjs"
+    "sse-cat": "lib/cli.js"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "repository": "git@github.com:BlackGlory/sse-cat.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
-    "deduplicate": "yarn-deduplicate",
-    "prepublishOnly": "run-s prepare clean build bundle",
     "prepare": "ts-patch install -s",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src",
-    "test": "jest --config jest.config.js",
-    "test:coverage": "jest --coverage --config jest.config.js",
+    "deduplicate": "yarn-deduplicate",
+    "prepublishOnly": "run-s prepare clean build",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src __tests__",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand --config jest.config.cjs",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand --coverage --config jest.config.cjs",
+    "test:debug": "cross-env NODE_OPTIONS='--experimental-vm-modules --inspect-brk' jest --runInBand --config jest.config.cjs",
     "dev": "ts-node -r tsconfig-paths/register src/cli.ts",
     "dev:debug": "node --inspect-brk node_modules/.bin/ts-node -r tsconfig-paths/register src/cli.ts",
-    "clean": "rimraf lib dist",
+    "clean": "rimraf lib",
     "build": "tsc --project tsconfig.build.json",
-    "bundle": "webpack --stats-error-details",
-    "smoke": "node dist/cli.cjs --help",
+    "smoke": "node lib/cli.js --help",
     "release": "standard-version"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s prepare clean lint build test bundle smoke",
+      "pre-commit": "run-s prepare clean lint build test smoke",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "dependencies": {
-    "@blackglory/errors": "^2.2.1",
-    "@blackglory/go": "^1.1.1",
-    "@blackglory/types": "^1.2.1",
-    "commander": "^9.4.0",
-    "eventsource": "^2.0.2",
-    "extra-timers": "^0.2.5",
-    "hotypes": "^0.4.4",
-    "justypes": "^2.0.0",
-    "rxjs": "^7.5.6"
-  },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
-    "@commitlint/config-conventional": "^17.0.3",
-    "@types/eventsource": "^1.1.9",
-    "@types/jest": "^27.4.0",
-    "@types/node": "14",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "eslint": "^8.20.0",
+    "@blackglory/jest-resolver": "^0.3.1",
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
+    "@types/jest": "^29.5.3",
+    "@types/node": "20.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.46.0",
+    "extra-promise": "^6.0.7",
     "husky": "4",
-    "jest": "^27.5.1",
+    "iterable-operator": "^4.0.6",
+    "jest": "^29.6.2",
+    "jest-resolve": "^29.6.2",
+    "msw": "^1.2.3",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2",
+    "return-style": "^3.0.1",
+    "rimraf": "^5.0.1",
     "standard-version": "^9.5.0",
-    "ts-jest": "^27.1.3",
+    "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "ts-patch": "^2.0.1",
-    "tsconfig-paths": "^4.0.0",
-    "typescript": "^4.7.4",
-    "typescript-transform-paths": "^3.3.1",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-shebang-plugin": "^1.1.7",
-    "yarn-deduplicate": "^5.0.0"
+    "ts-patch": "^3.0.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6",
+    "typescript-transform-paths": "^3.4.6",
+    "yarn-deduplicate": "^6.0.2"
+  },
+  "dependencies": {
+    "@blackglory/http-status": "^2.0.2",
+    "@blackglory/prelude": "^0.3.3",
+    "commander": "^11.0.0",
+    "extra-abort": "^0.3.7",
+    "extra-fetch": "^4.0.7",
+    "extra-filesystem": "^0.5.1",
+    "extra-sse": "^0.3.0",
+    "extra-timers": "^0.2.6",
+    "justypes": "^4.2.1"
   }
 }

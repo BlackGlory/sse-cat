@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 import { program } from 'commander'
-import { fromMultipleServerSentEvents } from './from-multiple-server-sent-events'
-import { parseHeaders } from '@utils/parse-headers'
-import { isUndefined, isntUndefined } from '@blackglory/types'
-import { IHeartbeatOptions } from './types'
-import { assert } from '@blackglory/errors'
+import { subscribeMessages, IHeartbeatOptions } from './subscribe-events.js'
+import { parseHeaders } from '@utils/parse-headers.js'
+import { assert, isUndefined, isntUndefined } from '@blackglory/prelude'
 import { Dictionary } from 'justypes'
+import { version, description } from '@utils/package.js'
 
 interface IOptions {
   header?: string[]
@@ -15,7 +14,6 @@ interface IOptions {
 }
 
 const name = 'sse-cat'
-const { version, description } = require('../package.json')
 process.title = name
 
 program
@@ -33,12 +31,14 @@ program
     const events = getEvents(options)
     const heartbeatOptions = getHeartbeatOptions(options)
 
-    fromMultipleServerSentEvents(urls, {
-      headers
-    , events
-    , heartbeat: heartbeatOptions
-    }).subscribe({
-      next(message) {
+    urls.forEach(async url => {
+      for await (
+        const message of subscribeMessages(url, {
+          headers
+        , events
+        , heartbeat: heartbeatOptions
+        })
+      ) {
         console.log(message)
       }
     })
