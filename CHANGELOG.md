@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/BlackGlory/sse-cat/compare/v2.1.1...v3.0.0) (2023-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* The minimal version of Node.js is 16.
+
+* use extra-sse ([95d99ac](https://github.com/BlackGlory/sse-cat/commit/95d99ac3c88a7103f56ca926cce173d2d54099e7))
+
 ### [2.1.1](https://github.com/BlackGlory/sse-cat/compare/v2.1.0...v2.1.1) (2023-01-28)
 
 
