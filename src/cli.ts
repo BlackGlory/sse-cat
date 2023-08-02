@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander'
 import { fromMultipleServerSentEvents } from './from-multiple-server-sent-events'
-import { createHeaderDictionary } from '@utils/create-header-dictionary'
+import { parseHeaders } from '@utils/parse-headers'
 import { isUndefined, isntUndefined } from '@blackglory/types'
 import { IHeartbeatOptions } from './types'
 import { assert } from '@blackglory/errors'
@@ -81,7 +81,7 @@ function getHeartbeatEvent(options: IOptions): string | undefined {
 }
 
 function getHeaders(options: IOptions): Dictionary<string> {
-  return createHeaderDictionary(options.header)
+  return parseHeaders(options.header ?? [])
 }
 
 function getEvents(options: IOptions): string[] {
