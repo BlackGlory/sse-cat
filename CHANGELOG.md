@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.2](https://github.com/BlackGlory/sse-cat/compare/v3.0.1...v3.0.2) (2026-02-16)
+
+
+### Bug Fixes
+
+* **subscribe-events:** update last event id ([3349fbf](https://github.com/BlackGlory/sse-cat/commit/3349fbff416926cdad2593e68d1988d48ebb19c4))
+
 ### [3.0.1](https://github.com/BlackGlory/sse-cat/compare/v3.0.0...v3.0.1) (2023-08-02)
 
 
