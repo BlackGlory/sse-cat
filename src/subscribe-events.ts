@@ -47,8 +47,11 @@ export async function* subscribeMessages(
           resetHeartbeatTimeout(controller, heartbeat.timeout)
         }
 
-        if (events.includes(event)) {
-          if (isntUndefined(data)) yield data
+        if (
+          events.includes(event) &&
+          isntUndefined(data)
+        ) {
+          yield data
         }
       }
     } catch (e) {
