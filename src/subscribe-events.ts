@@ -41,18 +41,14 @@ export async function* subscribeMessages(
           }
         )
       ) {
-        if (isntUndefined(lastEventId)) {
-          lastEventId = id
-        }
+        if (isntUndefined(id)) lastEventId = id
 
         if (heartbeat && event === heartbeat.event) {
           resetHeartbeatTimeout(controller, heartbeat.timeout)
         }
 
         if (events.includes(event)) {
-          if (isntUndefined(data)) {
-            yield data
-          }
+          if (isntUndefined(data)) yield data
         }
       }
     } catch (e) {
