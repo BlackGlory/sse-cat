@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/BlackGlory/sse-cat/compare/v3.0.2...v3.1.0) (2026-02-17)
+
+
+### Features
+
+* **parser-headers:** handle invalid headers ([3731626](https://github.com/BlackGlory/sse-cat/commit/3731626836ff561221d5f2404b0915b2f3577075))
+
 ### [3.0.2](https://github.com/BlackGlory/sse-cat/compare/v3.0.1...v3.0.2) (2026-02-16)
 
 
